@@ -190,6 +190,14 @@ nav a:hover {
     text-decoration: underline;
 }
 
+.page-content a.download-btn {
+    color: #000;
+}
+
+.page-content a.download-btn:hover {
+    text-decoration: none;
+}
+
 /* Support Card */
 .support-card {
     background: #1C1C1E;
