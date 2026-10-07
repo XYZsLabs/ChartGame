@@ -3,34 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - ChartGame</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Read the ChartGame Privacy Policy, last updated October 7, 2026.">
+    <title>Privacy Policy — ChartGame</title>
+    <style>
+        .chartgame-page {
+            --background: #0b100d;
+            --surface: #121a15;
+            --surface-hover: #19241d;
+            --line: #2b3930;
+            --text: #eff5f0;
+            --muted: #b7c5ba;
+            --soft: #95a69a;
+            --accent: #84e3a5;
+            --accent-hover: #a3edbb;
+            --ink: #0c1b12;
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-text-size-adjust: 100%;
+            overflow-wrap: anywhere;
+        }
+        .chartgame-page, .chartgame-page * { box-sizing: border-box; }
+        .chartgame-page a { color: var(--accent); text-underline-offset: 0.22em; }
+        .chartgame-page a:hover { color: var(--accent-hover); }
+        .chartgame-page :is(a):focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 5px;
+            border-radius: 4px;
+        }
+        .chartgame-page .shell { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+        .chartgame-page .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+        .chartgame-page .skip-link {
+            position: absolute;
+            z-index: 5;
+            top: 12px;
+            left: 24px;
+            padding: 12px 18px;
+            background: var(--accent);
+            color: var(--ink);
+            font-weight: 650;
+            transform: translateY(-180%);
+        }
+        .chartgame-page .skip-link:focus { transform: none; }
+        .chartgame-page .site-header { border-bottom: 1px solid var(--line); }
+        .chartgame-page .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            padding-block: 20px;
+        }
+        .chartgame-page .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 44px;
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            text-decoration: none;
+        }
+        .chartgame-page .brand img { display: block; border-radius: 10px; flex: 0 0 auto; }
+        .chartgame-page .header-links, .chartgame-page .footer-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chartgame-page .header-links a, .chartgame-page .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 8px 12px;
+            color: var(--muted);
+            font-size: 0.9375rem;
+            text-decoration: none;
+        }
+        .chartgame-page .header-links a:hover, .chartgame-page .footer-links a:hover { color: var(--text); }
+
+        .chartgame-page .eyebrow { display: block; margin: 0 0 18px; color: var(--accent); font-size: .875rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+        .chartgame-page h1 { margin: 0; font-size: clamp(2.75rem, 6vw, 5rem); font-weight: 700; line-height: 1.04; letter-spacing: -.055em; }
+        .chartgame-page .button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 52px; max-width: 100%; padding: 12px 20px; border: 1px solid transparent; border-radius: 10px; background: var(--accent); color: var(--ink); font-size: 1rem; font-weight: 700; line-height: 1.5; text-decoration: none; }
+        .chartgame-page .button:hover { background: var(--accent-hover); color: var(--ink); }
+        .chartgame-page .button:active { background: #70ca90; }
+        .chartgame-page .external-arrow { font-size: 1.25rem; line-height: 1; flex: 0 0 auto; }
+        .chartgame-page .site-footer { border-top: 1px solid var(--line); }
+        .chartgame-page .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 24px; }
+        .chartgame-page .footer-inner p { margin: 0; color: var(--soft); font-size: .875rem; }
+        @media (max-width: 600px) {
+            .chartgame-page .shell { width: calc(100% - 48px); }
+            .chartgame-page .header-inner { gap: 12px; padding-block: 14px; }
+            .chartgame-page .brand { gap: 10px; font-size: 1.125rem; }
+            .chartgame-page .brand img { width: 36px; height: 36px; border-radius: 9px; }
+            .chartgame-page .header-links a { padding-inline: 6px; }
+            .chartgame-page .footer-inner { align-items: flex-start; }
+            .chartgame-page .footer-links { margin-left: -12px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .chartgame-page *, .chartgame-page *::before, .chartgame-page *::after { scroll-behavior: auto; animation: none; transition: none; }
+        }
+
+        .privacy-page .policy-hero { padding-block: 64px 48px; border-bottom: 1px solid var(--line); }
+        .privacy-page .last-updated { margin: 22px 0 0; color: var(--muted); font-size: 1rem; }
+        .privacy-page .policy-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 40px 72px; }
+        .privacy-page .contents { align-self: start; min-width: 0; }
+        .privacy-page .contents-label { display: block; margin: 0 0 12px; color: var(--soft); font-size: .875rem; font-weight: 600; }
+        .privacy-page .contents-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+        .privacy-page .contents-links a { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: .9375rem; text-decoration: none; }
+        .privacy-page .contents-links a:hover { background: var(--surface); color: var(--text); }
+        .privacy-page .policy-content { min-width: 0; max-width: 72ch; }
+        .privacy-page .policy-section { scroll-margin-top: 32px; }
+        .privacy-page .policy-section + .policy-section { padding-top: 36px; margin-top: 36px; border-top: 1px solid var(--line); }
+        .privacy-page .policy-section h2 { margin: 0 0 18px; font-size: 1.625rem; font-weight: 650; line-height: 1.3; letter-spacing: -.03em; }
+        .privacy-page .policy-section h3 { margin: 28px 0 12px; font-size: 1.125rem; font-weight: 650; line-height: 1.4; letter-spacing: -.015em; }
+        .privacy-page .policy-section p { margin: 0 0 18px; color: var(--muted); line-height: 1.75; }
+        .privacy-page .policy-section p:last-child { margin-bottom: 0; }
+        .privacy-page .policy-section ul { margin: 0 0 20px; padding-left: 24px; color: var(--muted); }
+        .privacy-page .policy-section ul:last-child { margin-bottom: 0; }
+        .privacy-page .policy-section li { padding-left: 4px; line-height: 1.75; }
+        .privacy-page .policy-section li + li { margin-top: 10px; }
+        .privacy-page .policy-section li::marker { color: var(--accent); }
+        .privacy-page .policy-section strong { color: var(--text); font-weight: 650; }
+        .privacy-page .policy-section a { display: inline-flex; align-items: center; min-height: 44px; }
+        @media (min-width: 900px) {
+            .privacy-page .policy-hero { padding-block: 80px 56px; }
+            .privacy-page .policy-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 64px; padding-top: 56px; }
+            .privacy-page .contents { position: sticky; top: 32px; }
+            .privacy-page .contents-links { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+            .privacy-page .contents-links a { padding-inline: 0; border-color: transparent; }
+            .privacy-page .contents-links a:hover { background: transparent; color: var(--accent); }
+        }
+        @media (max-width: 600px) {
+            .privacy-page .policy-hero { padding-block: 44px 36px; }
+            .privacy-page .policy-layout { padding-block: 28px 48px; gap: 36px; }
+            .privacy-page .policy-section h2 { font-size: 1.375rem; }
+            .privacy-page .policy-section + .policy-section { padding-top: 28px; margin-top: 28px; }
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
-                    <img src="appicon.png" alt="ChartGame" width="52" height="52" style="border-radius:10px;">
-                    <span>ChartGame</span>
-                </a>
-            </div>
-            <nav>
+<body class="chartgame-page privacy-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="index.html" aria-label="ChartGame home">
+                <img src="appicon.png" alt="" width="40" height="40">
+                <span>ChartGame</span>
+            </a>
+            <nav class="header-links" aria-label="Main navigation">
                 <a href="index.html">Home</a>
                 <a href="support.html">Support</a>
             </nav>
         </div>
     </header>
-
-    <main>
-        <div class="container page-content">
+    <main id="main" class="shell" tabindex="-1">
+        <div class="policy-hero">
+            <span class="eyebrow">ChartGame</span>
             <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: March 30, 2026</p>
-
-            <h2>Overview</h2>
+            <p class="last-updated">Last updated: October 7, 2026 · Applies to version 1.8</p>
+        </div>
+        <div class="policy-layout">
+            <aside class="contents" aria-label="Policy contents">
+                <span class="contents-label">On this page</span>
+                <nav class="contents-links" aria-label="Privacy Policy sections">
+                        <a href="#overview">Overview</a>
+                        <a href="#data-collected">Data we collect</a>
+                        <a href="#services">Third-party services</a>
+                        <a href="#not-collected">Not requested</a>
+                        <a href="#retention-deletion">Retention &amp; deletion</a>
+                        <a href="#children">Children's privacy</a>
+                        <a href="#policy-changes">Policy changes</a>
+                        <a href="#contact">Contact</a>
+                </nav>
+            </aside>
+            <article class="policy-content" aria-label="Privacy Policy">
+                <section class="policy-section" id="overview">
+                    <h2>Overview</h2>
             <p>ChartGame ("the App") is developed by XYZsLabs. We are committed to protecting your privacy. This policy explains what data the App collects, how it is used, and your rights.</p>
 
-            <h2>Data We Collect</h2>
+                            </section>
+                <section class="policy-section" id="data-collected">
+                    <h2>Data We Collect</h2>
 
             <h3>Anonymous Account</h3>
             <p>When you first use the App, an anonymous account is created automatically using Firebase Authentication. No email, phone number, or real name is required. You may choose a display name (pseudonym) to appear on leaderboards; otherwise, a random name is assigned.</p>
@@ -44,6 +207,7 @@
                 <li>Net worth history and individual game return values</li>
                 <li>Daily challenge results (player ROI, benchmark ROI, final portfolio value, completion timestamp)</li>
                 <li>Follow relationships (which players you follow)</li>
+                <li>Live paper-trading performance, including cumulative profit or loss, net worth history, total trade count, active market count and market symbols; selected avatar and trader tier</li>
                 <li>Last updated timestamp</li>
             </ul>
 
@@ -57,50 +221,64 @@
                 <li>App preferences (selected indicators, UI settings)</li>
             </ul>
 
-            <h2>Third-Party Services</h2>
+                            </section>
+                <section class="policy-section" id="services">
+                    <h2>Third-Party Services</h2>
             <ul>
-                <li><strong>Firebase (Google)</strong> — Used for anonymous authentication, remote data storage (Firestore), and app configuration (Remote Config). Firebase Analytics and Firebase Ads are explicitly disabled in the App.</li>
-                <li><strong>Finnhub</strong> — Used to fetch market news articles. No user data is sent to Finnhub; only a news category parameter is included in requests.</li>
+                <li><strong>Firebase (Google)</strong> — Used for anonymous authentication, remote data storage (Firestore), and app configuration (Remote Config). These services can process operational information such as installation identifiers, IP addresses, and SDK or device metadata to operate and secure the services. See <a href="https://firebase.google.com/support/privacy">Firebase privacy information</a>.</li>
+                <li><strong>Coinbase</strong> — Used to retrieve cryptocurrency market prices and historical candles for simulated trading. Requests identify the selected market and interval, and Coinbase receives ordinary connection information such as your IP address. These services do not send your ChartGame profile or simulated orders to Coinbase. See <a href="https://www.coinbase.com/legal/privacy">Coinbase’s privacy policy</a>.</li>
+                <li><strong>Finnhub</strong> — Used to fetch market news articles. Requests include a news category and the App’s API token; the App does not include your profile name, anonymous user ID, or trading history in these requests. Finnhub receives ordinary connection information. See <a href="https://finnhub.io/terms-of-service">Finnhub’s terms and privacy information</a>.</li>
             </ul>
 
-            <h2>Data We Do Not Collect</h2>
+                            </section>
+                <section class="policy-section" id="not-collected">
+                    <h2>Data the App Does Not Request or Record</h2>
             <ul>
                 <li>Email address, phone number, or real name</li>
-                <li>Location data</li>
-                <li>Device identifiers (IDFA, UDID)</li>
+                <li>Precise GPS location</li>
+                <li>Advertising identifiers (IDFA) or the device’s UDID; Firebase installation identifiers are described above</li>
                 <li>Contacts, calendar, or health data</li>
                 <li>Browsing or search history</li>
-                <li>Analytics, advertising, or tracking data</li>
+                <li>Advertising profiles or cross-app tracking data</li>
             </ul>
 
-            <h2>Data Retention and Deletion</h2>
-            <p>You can reset your account at any time from your profile in the App. Resetting your account will:</p>
+                            </section>
+                <section class="policy-section" id="retention-deletion">
+                    <h2>Data Retention and Deletion</h2>
+            <p>Version 1.8 offers separate Reset Replay Progress and Reset Live Paper Account controls in Profile:</p>
             <ul>
-                <li>Delete your Firebase anonymous account and authentication token</li>
-                <li>Delete your follow relationships</li>
-                <li>Delete your profile photo from your device</li>
-                <li>Generate a new anonymous account with a new user ID</li>
+                <li>Reset Replay Progress clears local replay progress and attempts to remove your replay leaderboard entry.</li>
+                <li>Reset Live Paper Account clears the local live paper account and its trading history and attempts to reset your live leaderboard score.</li>
             </ul>
-            <p>Your previous leaderboard entry (display name and stats) may remain as a historical record. To remove all locally stored data, delete the App from your device.</p>
+            <p>These controls do not delete your anonymous Firebase account, follow relationships, or profile photo, and they do not provide complete server-data deletion. Server updates require a connection and can fail. For other data-deletion requests, use the Contact section below.</p>
+            <p>To remove locally stored app data, delete the App from your device. Deleting the App does not delete cloud records. Service providers may retain operational logs or backup copies under their own retention policies.</p>
 
-            <h2>Children's Privacy</h2>
+                            </section>
+                <section class="policy-section" id="children">
+                    <h2>Children's Privacy</h2>
             <p>The App does not knowingly collect data from children under 13. Since no personal information is required to use the App, we have no way to identify the age of our users.</p>
 
-            <h2>Changes to This Policy</h2>
+                            </section>
+                <section class="policy-section" id="policy-changes">
+                    <h2>Changes to This Policy</h2>
             <p>We may update this policy from time to time. Changes will be posted on this page with an updated date.</p>
 
-            <h2>Contact</h2>
+                            </section>
+                <section class="policy-section" id="contact">
+                    <h2>Contact</h2>
             <p>For privacy-related inquiries, data deletion requests, or questions about this policy, please open an issue on our <a href="https://github.com/XYZsLabs/ChartGame/issues">GitHub Issues</a> page. We will respond within a reasonable timeframe.</p>
+            <p>GitHub issues are public. Do not include account identifiers, profile photos, or other sensitive information in an issue; ask us to arrange a private follow-up.</p>
+                        </section>
+            </article>
         </div>
     </main>
-
-    <footer>
-        <div class="container">
+    <footer class="site-footer">
+        <div class="shell footer-inner">
             <p>&copy; 2026 XYZsLabs. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="privacy.html" aria-current="page">Privacy Policy</a>
                 <a href="support.html">Support</a>
-            </div>
+            </nav>
         </div>
     </footer>
 </body>
