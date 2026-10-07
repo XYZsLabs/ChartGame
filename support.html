@@ -3,85 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - ChartGame</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Get help with ChartGame, find answers about replay trading and your account, and learn where the market data comes from.">
+    <title>Support — ChartGame</title>
+    <style>
+        .support-page {
+            --background: #0b100d;
+            --surface: #121a15;
+            --surface-hover: #19241d;
+            --line: #2b3930;
+            --text: #eff5f0;
+            --muted: #b7c5ba;
+            --soft: #95a69a;
+            --accent: #84e3a5;
+            --accent-hover: #a3edbb;
+            --ink: #0c1b12;
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-text-size-adjust: 100%;
+            overflow-wrap: anywhere;
+        }
+        .support-page, .support-page * { box-sizing: border-box; }
+        .support-page a { color: var(--accent); text-underline-offset: 0.22em; }
+        .support-page a:hover { color: var(--accent-hover); }
+        .support-page :is(a, summary):focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 5px;
+            border-radius: 4px;
+        }
+        .support-page .shell { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+        .support-page .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+        .support-page .skip-link {
+            position: absolute;
+            z-index: 5;
+            top: 12px;
+            left: 24px;
+            padding: 12px 18px;
+            background: var(--accent);
+            color: var(--ink);
+            font-weight: 650;
+            transform: translateY(-180%);
+        }
+        .support-page .skip-link:focus { transform: none; }
+        .support-page .site-header { border-bottom: 1px solid var(--line); }
+        .support-page .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            padding-block: 20px;
+        }
+        .support-page .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 44px;
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            text-decoration: none;
+        }
+        .support-page .brand img { display: block; border-radius: 10px; flex: 0 0 auto; }
+        .support-page .header-links, .support-page .footer-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .support-page .header-links a, .support-page .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 8px 12px;
+            color: var(--muted);
+            font-size: 0.9375rem;
+            text-decoration: none;
+        }
+        .support-page .header-links a:hover, .support-page .footer-links a:hover { color: var(--text); }
+        .support-page .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 36px;
+            padding-block: 64px 56px;
+            border-bottom: 1px solid var(--line);
+        }
+        .support-page .eyebrow {
+            margin: 0 0 18px;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 650;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .support-page h1 {
+            margin: 0;
+            font-size: clamp(2.75rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.04;
+            letter-spacing: -0.055em;
+        }
+        .support-page .hero-intro {
+            max-width: 43ch;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 1.125rem;
+            line-height: 1.65;
+        }
+        .support-page .help-intro { align-self: end; max-width: 40ch; }
+        .support-page .help-intro h2 { margin: 0 0 12px; font-size: 1.375rem; letter-spacing: -0.025em; }
+        .support-page .help-intro p { margin: 0 0 20px; color: var(--muted); }
+        .support-page .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            min-height: 52px;
+            max-width: 100%;
+            padding: 12px 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: var(--accent);
+            color: var(--ink);
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            text-decoration: none;
+        }
+        .support-page .button:hover { background: var(--accent-hover); color: var(--ink); }
+        .support-page .button:active { background: #70ca90; }
+        .support-page .external-arrow { font-size: 1.25rem; line-height: 1; flex: 0 0 auto; }
+        .support-page .help-intro .public-note { margin: 14px 0 0; color: var(--soft); font-size: 0.875rem; }
+        .support-page .page-layout { display: grid; gap: 40px; padding-block: 40px 72px; }
+        .support-page .topic-rail { align-self: start; min-width: 0; }
+        .support-page .topic-title {
+            margin: 0 0 12px;
+            color: var(--soft);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .support-page .topic-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+        .support-page .topic-links a {
+            display: flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 0.9375rem;
+            text-decoration: none;
+        }
+        .support-page .topic-links a:hover { background: var(--surface); color: var(--text); }
+        .support-page .support-content { min-width: 0; }
+        .support-page .content-section { scroll-margin-top: 32px; }
+        .support-page .content-section + .content-section { margin-top: 56px; }
+        .support-page .section-heading { margin-bottom: 22px; }
+        .support-page .section-heading h2 {
+            margin: 0;
+            font-size: 1.75rem;
+            line-height: 1.25;
+            letter-spacing: -0.035em;
+            font-weight: 650;
+        }
+        .support-page .section-heading p { margin: 10px 0 0; color: var(--muted); max-width: 62ch; }
+        .support-page .faq-list { border-top: 1px solid var(--line); }
+        .support-page .faq-item { border-bottom: 1px solid var(--line); }
+        .support-page .faq-item summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            min-height: 76px;
+            padding: 22px 0;
+            color: var(--text);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            line-height: 1.5;
+            list-style: none;
+            cursor: pointer;
+        }
+        .support-page .faq-item summary::-webkit-details-marker { display: none; }
+        .support-page .faq-item summary:hover { color: var(--accent); }
+        .support-page .toggle { position: relative; display: block; width: 20px; height: 20px; flex: 0 0 20px; color: var(--accent); }
+        .support-page .toggle::before, .support-page .toggle::after {
+            position: absolute;
+            display: block;
+            content: "";
+            inset: 9px 2px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 1px;
+        }
+        .support-page .toggle::after { transform: rotate(90deg); }
+        .support-page .faq-item[open] .toggle::after { display: none; }
+        .support-page .faq-answer { max-width: 66ch; padding: 0 36px 24px 0; }
+        .support-page .faq-answer p { margin: 0; color: var(--muted); }
+        .support-page .faq-answer a { display: inline-flex; align-items: center; min-height: 44px; }
+        .support-page .source-list { border-top: 1px solid var(--line); }
+        .support-page .source { padding-block: 26px; border-bottom: 1px solid var(--line); }
+        .support-page .source-label { margin: 0 0 8px; color: var(--accent); font-size: 0.875rem; font-weight: 600; }
+        .support-page .source h3 { margin: 0 0 12px; font-size: 1.1875rem; font-weight: 650; letter-spacing: -0.02em; }
+        .support-page .source p:not(.source-label) { margin: 0; color: var(--muted); max-width: 66ch; }
+        .support-page .source-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 12px; }
+        .support-page .source-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.9375rem; }
+        .support-page .data-note { margin: 20px 0 0; color: var(--soft); font-size: 0.9375rem; max-width: 66ch; }
+        .support-page .contact-section { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+        .support-page .contact-section h2 { margin: 0; font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.03em; }
+        .support-page .contact-section p { margin: 14px 0 20px; color: var(--muted); max-width: 58ch; }
+        .support-page .button-secondary { background: transparent; color: var(--text); border-color: #657b6c; }
+        .support-page .button-secondary:hover { background: var(--surface-hover); color: var(--text); }
+        .support-page .contact-section .public-note { margin: 16px 0 0; font-size: 0.875rem; color: var(--soft); }
+        .support-page .site-footer { border-top: 1px solid var(--line); }
+        .support-page .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 24px; }
+        .support-page .footer-inner p { margin: 0; color: var(--soft); font-size: 0.875rem; }
+        @media (min-width: 900px) {
+            .support-page .hero { grid-template-columns: minmax(0, 1fr) minmax(288px, 0.7fr); gap: 64px; padding-block: 80px 64px; }
+            .support-page .page-layout { grid-template-columns: 200px minmax(0, 1fr); gap: 64px; padding-top: 56px; }
+            .support-page .topic-rail { position: sticky; top: 32px; }
+            .support-page .topic-links { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+            .support-page .topic-links a { border-color: transparent; padding-inline: 0; }
+            .support-page .topic-links a:hover { background: transparent; color: var(--accent); }
+        }
+        @media (max-width: 600px) {
+            .support-page .shell { width: calc(100% - 48px); }
+            .support-page .header-inner { gap: 12px; padding-block: 14px; }
+            .support-page .brand { gap: 10px; font-size: 1.125rem; }
+            .support-page .brand img { width: 36px; height: 36px; border-radius: 9px; }
+            .support-page .header-links a { padding-inline: 6px; }
+            .support-page .hero { padding-block: 44px 40px; gap: 32px; }
+            .support-page .hero-intro { font-size: 1.0625rem; margin-top: 20px; }
+            .support-page .page-layout { padding-block: 28px 48px; gap: 36px; }
+            .support-page .section-heading h2 { font-size: 1.5rem; }
+            .support-page .faq-answer { padding-right: 0; }
+            .support-page .content-section + .content-section { margin-top: 44px; }
+            .support-page .contact-section { padding: 22px; }
+            .support-page .contact-section .button { width: 100%; gap: 12px; }
+            .support-page .footer-inner { align-items: flex-start; }
+            .support-page .footer-links { margin-left: -12px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .support-page *, .support-page *::before, .support-page *::after { scroll-behavior: auto; animation: none; transition: none; }
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
-                    <img src="appicon.png" alt="ChartGame" width="52" height="52" style="border-radius:10px;">
-                    <span>ChartGame</span>
-                </a>
-            </div>
-            <nav>
+<body class="support-page">
+    <a class="skip-link" href="#main">Skip to support</a>
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="index.html" aria-label="ChartGame home">
+                <img src="appicon.png" alt="" width="40" height="40">
+                <span>ChartGame</span>
+            </a>
+            <nav class="header-links" aria-label="Main navigation">
                 <a href="index.html">Home</a>
                 <a href="privacy.html">Privacy</a>
             </nav>
         </div>
     </header>
 
-    <main>
-        <div class="container page-content">
-            <h1>Support</h1>
-
-            <div class="support-card">
-                <h2>Need Help?</h2>
-                <p>If you're experiencing a bug, have a question, or want to request a feature, please open an issue on our GitHub repository.</p>
-                <a href="https://github.com/XYZsLabs/ChartGame/issues" class="download-btn" target="_blank" rel="noopener" style="color:#000;">Open a GitHub Issue</a>
+    <main id="main" class="shell" tabindex="-1">
+        <section class="hero" aria-labelledby="support-title">
+            <div>
+                <p class="eyebrow">Player support</p>
+                <h1 id="support-title">Get back to<br>the game.</h1>
+                <p class="hero-intro">A quick answer, a bug report, or an idea for your next replay. Start here.</p>
             </div>
+            <div class="help-intro">
+                <h2>Need a hand?</h2>
+                <p>Ask a question, report a bug, or suggest a feature on GitHub.</p>
+                <a class="button" href="https://github.com/XYZsLabs/ChartGame/issues" target="_blank" rel="noopener noreferrer" aria-describedby="hero-public-note">
+                    <span>Open a GitHub issue</span>
+                    <span class="external-arrow" aria-hidden="true">↗</span>
+                    <span class="visually-hidden">(opens in a new tab)</span>
+                </a>
+                <p id="hero-public-note" class="public-note">Issues are public. Keep personal information out of your report.</p>
+            </div>
+        </section>
 
-            <div class="faq">
-                <h2>Frequently Asked Questions</h2>
+        <div class="page-layout">
+            <aside class="topic-rail" aria-label="Support topics">
+                <p class="topic-title">Jump to a topic</p>
+                <nav class="topic-links" aria-label="On this page">
+                    <a href="#playing">Playing</a>
+                    <a href="#account">Account &amp; privacy</a>
+                    <a href="#market-data">Market data</a>
+                    <a href="#get-help">Get help</a>
+                </nav>
+            </aside>
 
-                <div class="faq-item">
-                    <h3>How does ChartGame work?</h3>
-                    <p>You're shown a real historical stock or crypto chart. You make buy and sell decisions as the chart reveals bar by bar. At the end, your return is compared against a simple buy-and-hold strategy.</p>
-                </div>
+            <div class="support-content">
+                <section class="content-section" id="playing" aria-labelledby="playing-title">
+                    <div class="section-heading">
+                        <h2 id="playing-title">Playing ChartGame</h2>
+                        <p>The basics, before your next move.</p>
+                    </div>
+                    <div class="faq-list">
+                        <details class="faq-item" open>
+                            <summary><span>How does ChartGame work?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>You're shown a real historical stock or crypto chart. Make buy and sell decisions as the chart reveals bar by bar. At the end, your return is compared with a simple buy-and-hold strategy.</p></div>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span>Is real money involved?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>No. ChartGame is a simulation for practice and education. All trading uses virtual currency, so no real money is at risk.</p></div>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span>What is the Daily Challenge?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>Every day, all players get the same chart to trade. Results are ranked on a daily leaderboard so you can see how your skills compare.</p></div>
+                        </details>
+                    </div>
+                </section>
 
-                <div class="faq-item" id="market-data" style="scroll-margin-top:120px;">
-                    <h3>Where does the market data come from?</h3>
-                    <p><strong>Live crypto charts:</strong> Coinbase Exchange supplies market candles and price updates. Practice orders are simulated by ChartGame and are not sent to Coinbase. See the <a href="https://www.coinbase.com/legal/market_data">Coinbase market data terms</a>.</p>
-                    <p style="margin-top:12px;"><strong>Pattern Quest, planned for version 1.9:</strong> Its stock/ETF examples use a separate historical dataset obtained from Yahoo Finance through yfinance. This historical dataset is separate from the Coinbase live crypto feed. See the <a href="https://ranaroussi.github.io/yfinance/">yfinance source documentation</a> and <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">Yahoo terms</a>.</p>
-                    <p style="margin-top:12px;">ChartGame uses virtual money for practice. Third-party data remains subject to the applicable provider terms; source credits do not grant a separate license to extract or redistribute it.</p>
-                </div>
+                <section class="content-section" id="account" aria-labelledby="account-title">
+                    <div class="section-heading">
+                        <h2 id="account-title">Account &amp; privacy</h2>
+                        <p>Getting started, starting over, and your data.</p>
+                    </div>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary><span>Do I need to create an account?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>No. The app automatically creates an anonymous account using Firebase Authentication. No email or phone number is required. Choose a display name, or use the random one assigned to you.</p></div>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span>How do I reset my account?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>Go to your profile in the app and use the reset account option. This deletes your Firebase account, profile photo, and follow relationships, then creates a fresh anonymous account with a new user ID. Your previous leaderboard entry may remain as a historical record.</p></div>
+                        </details>
+                        <details class="faq-item">
+                            <summary><span>What data does ChartGame collect?</span><span class="toggle" aria-hidden="true"></span></summary>
+                            <div class="faq-answer"><p>Your display name, game performance stats, and daily challenge results are stored on our servers. See our <a href="privacy.html">Privacy Policy</a> for full details.</p></div>
+                        </details>
+                    </div>
+                </section>
 
-                <div class="faq-item">
-                    <h3>Do I need to create an account?</h3>
-                    <p>No. The app creates an anonymous account automatically using Firebase Authentication. No email, phone number, or personal information is required. You can choose a display name, or a random one is assigned.</p>
-                </div>
+                <section class="content-section" id="market-data" aria-labelledby="market-data-title">
+                    <div class="section-heading">
+                        <h2 id="market-data-title">Where the market data comes from</h2>
+                        <p>Different modes use different sources.</p>
+                    </div>
+                    <div class="source-list">
+                        <article class="source">
+                            <p class="source-label">Live crypto charts</p>
+                            <h3>Coinbase Exchange</h3>
+                            <p>Coinbase Exchange supplies market candles and price updates. Practice orders are simulated by ChartGame and are not sent to Coinbase.</p>
+                            <div class="source-links"><a href="https://www.coinbase.com/legal/market_data">Coinbase market data terms</a></div>
+                        </article>
+                        <article class="source">
+                            <p class="source-label">Pattern Quest · planned for version 1.9</p>
+                            <h3>Yahoo Finance via yfinance</h3>
+                            <p>Its stock and ETF examples use a separate historical dataset obtained from Yahoo Finance through yfinance. This dataset is separate from the Coinbase live crypto feed.</p>
+                            <div class="source-links">
+                                <a href="https://ranaroussi.github.io/yfinance/">yfinance source documentation</a>
+                                <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">Yahoo terms</a>
+                            </div>
+                        </article>
+                    </div>
+                    <p class="data-note">ChartGame uses virtual money for practice. Third-party data remains subject to the applicable provider terms; source credits do not grant a separate license to extract or redistribute it.</p>
+                </section>
 
-                <div class="faq-item">
-                    <h3>Is real money involved?</h3>
-                    <p>No. ChartGame is a simulation for practice and education only. All trading uses virtual currency. No real money is ever at risk.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>How do I reset my account?</h3>
-                    <p>Go to your profile in the app and use the reset account option. This will delete your Firebase account, profile photo, and follow relationships, and create a fresh anonymous account with a new user ID. Your previous leaderboard entry may remain as a historical record.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>What data does ChartGame collect?</h3>
-                    <p>Only your display name, game performance stats, and daily challenge results are stored on our servers. No personal information is collected. See our <a href="privacy.html">Privacy Policy</a> for full details.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>What is the Daily Challenge?</h3>
-                    <p>Every day, all players get the same chart to trade. Results are ranked on a daily leaderboard so you can see how your skills compare.</p>
-                </div>
+                <section class="content-section contact-section" id="get-help" aria-labelledby="help-title">
+                    <h2 id="help-title">Something still off?</h2>
+                    <p>Tell us what happened, what you expected, and your app version and device. A screenshot helps.</p>
+                    <a class="button button-secondary" href="https://github.com/XYZsLabs/ChartGame/issues" target="_blank" rel="noopener noreferrer" aria-describedby="contact-public-note">
+                        <span>Get help on GitHub</span>
+                        <span class="external-arrow" aria-hidden="true">↗</span>
+                        <span class="visually-hidden">(opens in a new tab)</span>
+                    </a>
+                    <p id="contact-public-note" class="public-note">GitHub issues are public. Don't include personal information, account identifiers, or photos you don't want to share.</p>
+                </section>
             </div>
         </div>
     </main>
 
-    <footer>
-        <div class="container">
+    <footer class="site-footer">
+        <div class="shell footer-inner">
             <p>&copy; 2026 XYZsLabs. All rights reserved.</p>
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Footer navigation">
                 <a href="privacy.html">Privacy Policy</a>
-                <a href="support.html">Support</a>
-            </div>
+                <a href="support.html" aria-current="page">Support</a>
+            </nav>
         </div>
     </footer>
 </body>
