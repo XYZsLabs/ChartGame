@@ -3,92 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChartGame - Practice Trading with Virtual Money</title>
+    <meta name="color-scheme" content="dark">
     <meta name="description" content="Practice on historical stock and crypto charts with virtual money. Included replays work offline; compare your results with buy-and-hold and take the daily challenge.">
-    <link rel="stylesheet" href="style.css">
+    <title>ChartGame — Practice Trading with Virtual Money</title>
+    <style>
+        .chartgame-page {
+            --background: #0b100d;
+            --surface: #121a15;
+            --surface-hover: #19241d;
+            --line: #2b3930;
+            --text: #eff5f0;
+            --muted: #b7c5ba;
+            --soft: #95a69a;
+            --accent: #84e3a5;
+            --accent-hover: #a3edbb;
+            --ink: #0c1b12;
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-text-size-adjust: 100%;
+            overflow-wrap: anywhere;
+        }
+        .chartgame-page, .chartgame-page * { box-sizing: border-box; }
+        .chartgame-page a { color: var(--accent); text-underline-offset: 0.22em; }
+        .chartgame-page a:hover { color: var(--accent-hover); }
+        .chartgame-page :is(a):focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 5px;
+            border-radius: 4px;
+        }
+        .chartgame-page .shell { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+        .chartgame-page .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+        .chartgame-page .skip-link {
+            position: absolute;
+            z-index: 5;
+            top: 12px;
+            left: 24px;
+            padding: 12px 18px;
+            background: var(--accent);
+            color: var(--ink);
+            font-weight: 650;
+            transform: translateY(-180%);
+        }
+        .chartgame-page .skip-link:focus { transform: none; }
+        .chartgame-page .site-header { border-bottom: 1px solid var(--line); }
+        .chartgame-page .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            padding-block: 20px;
+        }
+        .chartgame-page .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 44px;
+            color: var(--text);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            text-decoration: none;
+        }
+        .chartgame-page .brand img { display: block; border-radius: 10px; flex: 0 0 auto; }
+        .chartgame-page .header-links, .chartgame-page .footer-links { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chartgame-page .header-links a, .chartgame-page .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 8px 12px;
+            color: var(--muted);
+            font-size: 0.9375rem;
+            text-decoration: none;
+        }
+        .chartgame-page .header-links a:hover, .chartgame-page .footer-links a:hover { color: var(--text); }
+
+        .chartgame-page .eyebrow { display: block; margin: 0 0 18px; color: var(--accent); font-size: .875rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+        .chartgame-page h1 { margin: 0; font-size: clamp(2.75rem, 6vw, 5rem); font-weight: 700; line-height: 1.04; letter-spacing: -.055em; }
+        .chartgame-page .button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 52px; max-width: 100%; padding: 12px 20px; border: 1px solid transparent; border-radius: 10px; background: var(--accent); color: var(--ink); font-size: 1rem; font-weight: 700; line-height: 1.5; text-decoration: none; }
+        .chartgame-page .button:hover { background: var(--accent-hover); color: var(--ink); }
+        .chartgame-page .button:active { background: #70ca90; }
+        .chartgame-page .external-arrow { font-size: 1.25rem; line-height: 1; flex: 0 0 auto; }
+        .chartgame-page .site-footer { border-top: 1px solid var(--line); }
+        .chartgame-page .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 24px; }
+        .chartgame-page .footer-inner p { margin: 0; color: var(--soft); font-size: .875rem; }
+        @media (max-width: 600px) {
+            .chartgame-page .shell { width: calc(100% - 48px); }
+            .chartgame-page .header-inner { gap: 12px; padding-block: 14px; }
+            .chartgame-page .brand { gap: 10px; font-size: 1.125rem; }
+            .chartgame-page .brand img { width: 36px; height: 36px; border-radius: 9px; }
+            .chartgame-page .header-links a { padding-inline: 6px; }
+            .chartgame-page .footer-inner { align-items: flex-start; }
+            .chartgame-page .footer-links { margin-left: -12px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .chartgame-page *, .chartgame-page *::before, .chartgame-page *::after { scroll-behavior: auto; animation: none; transition: none; }
+        }
+
+        .home-page .hero { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 40px; padding-block: 64px 56px; border-bottom: 1px solid var(--line); }
+        .home-page .hero-copy { min-width: 0; }
+        .home-page .hero-intro { max-width: 44ch; margin: 24px 0 28px; color: var(--muted); font-size: 1.125rem; line-height: 1.65; }
+        .home-page .hero-note { margin: 14px 0 0; color: var(--soft); font-size: .875rem; }
+        .home-page .replay-loop { min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+        .home-page .loop-label { display: block; margin-bottom: 24px; color: var(--soft); font-size: .875rem; font-weight: 600; }
+        .home-page .replay-loop ol { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+        .home-page .replay-loop li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 16px; counter-increment: step; }
+        .home-page .replay-loop li + li { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+        .home-page .replay-loop li::before { content: counter(step, decimal-leading-zero); color: var(--accent); font-size: .875rem; font-weight: 650; line-height: 1.8; }
+        .home-page .replay-loop strong { display: block; font-size: 1.125rem; line-height: 1.4; font-weight: 650; letter-spacing: -.02em; }
+        .home-page .replay-loop p { margin: 6px 0 0; color: var(--muted); font-size: .9375rem; }
+        .home-page .features { padding-block: 56px; }
+        .home-page .features > h2 { margin: 0 0 32px; max-width: 20ch; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 650; line-height: 1.2; letter-spacing: -.04em; }
+        .home-page .feature-list { border-top: 1px solid var(--line); }
+        .home-page .feature { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+        .home-page .feature h3 { margin: 0; font-size: 1.25rem; font-weight: 650; line-height: 1.4; letter-spacing: -.025em; }
+        .home-page .feature p { margin: 0; max-width: 60ch; color: var(--muted); }
+        .home-page .closing { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 40px; padding-block: 8px 64px; }
+        .home-page .closing h2 { margin: 0 0 10px; font-size: 1.75rem; line-height: 1.25; font-weight: 650; letter-spacing: -.035em; }
+        .home-page .closing p { margin: 0; color: var(--muted); }
+        .home-page .closing p a { display: inline-flex; align-items: center; min-height: 44px; }
+        @media (min-width: 900px) {
+            .home-page .hero { grid-template-columns: minmax(0, 1.35fr) minmax(288px, .8fr); gap: 64px; padding-block: 80px 64px; }
+            .home-page .feature { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 64px; padding-block: 32px; }
+        }
+        @media (max-width: 600px) {
+            .home-page .hero { padding-block: 44px 40px; gap: 32px; }
+            .home-page .hero-intro { margin-block: 20px 24px; font-size: 1.0625rem; }
+            .home-page .replay-loop { padding: 22px; }
+            .home-page .replay-loop li { gap: 12px; }
+            .home-page .features { padding-block: 40px; }
+            .home-page .features > h2 { margin-bottom: 24px; }
+            .home-page .feature { padding-block: 24px; }
+            .home-page .closing { padding-bottom: 48px; }
+            .home-page .closing h2 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="appicon.png" alt="ChartGame" width="52" height="52" style="border-radius:10px;">
+<body class="chartgame-page home-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="index.html" aria-label="ChartGame home">
+                <img src="appicon.png" alt="" width="40" height="40">
                 <span>ChartGame</span>
-            </div>
-            <nav>
+            </a>
+            <nav class="header-links" aria-label="Main navigation">
                 <a href="privacy.html">Privacy</a>
                 <a href="support.html">Support</a>
             </nav>
         </div>
     </header>
+    <main id="main" class="shell" tabindex="-1">
+        <section class="hero" aria-labelledby="game-title">
+            <div class="hero-copy">
+                <span class="eyebrow">The trading practice game</span>
+                <h1 id="game-title">Read the chart.<br>Make your move.</h1>
+                <p class="hero-intro">Trade stocks and crypto through real market history. Make your calls, compare your results, and come back for another replay.</p>
+                <a class="button" href="https://apps.apple.com/us/app/chartgame-trading-simulator/id6761395602"><span>Download on the App Store</span><span class="external-arrow" aria-hidden="true">↗</span></a>
+                <p class="hero-note">All trading uses virtual money.</p>
+            </div>
+            <aside class="replay-loop" aria-label="How a replay works">
+                <span class="loop-label">The replay loop</span>
+                <ol>
+                    <li><div><strong>Read.</strong><p>Reveal a historical chart one candle at a time.</p></div></li>
+                    <li><div><strong>Decide.</strong><p>Make buy and sell decisions as the chart unfolds.</p></div></li>
+                    <li><div><strong>Compare.</strong><p>See how your return stacks up against buy-and-hold.</p></div></li>
+                </ol>
+            </aside>
+        </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Practice Trading.<br>With Virtual Money.</h1>
-                <p class="subtitle">Trade stocks and crypto using real historical market data. Sharpen your skills, compete on the leaderboard, and learn to read charts — all without risking real money.</p>
-                <a href="https://apps.apple.com/us/app/chartgame-trading-simulator/id6761395602" class="download-btn">Download on the App Store</a>
+        <section class="features" aria-labelledby="features-title">
+            <h2 id="features-title">Make every replay count.</h2>
+            <div class="feature-list">
+                <article class="feature"><h3>Offline Replay</h3><p>Practice decisions as historical stock and crypto charts reveal one candle at a time. Included charts work offline, with no separate download.</p></article>
+                <article class="feature"><h3>Daily Challenge</h3><p>A new challenge every day. Compare results with players taking the same daily challenge.</p></article>
+                <article class="feature"><h3>Career &amp; performance</h3><p>Track your progress with ROI, win rate, and how you stack up against a buy-and-hold strategy.</p></article>
+                <article class="feature"><h3>Leaderboard</h3><p>Compete with other players, compare your results, and climb the rankings.</p></article>
             </div>
         </section>
 
-        <section class="features">
-            <div class="container">
-                <div class="feature-grid">
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C805" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                        </div>
-                        <h3>Offline Replay</h3>
-                        <p>Practice decisions as historical stock and crypto charts reveal one candle at a time. Included charts work offline, with no separate download.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C805" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 20V10"></path>
-                                <path d="M18 20V4"></path>
-                                <path d="M6 20v-4"></path>
-                            </svg>
-                        </div>
-                        <h3>Track Performance</h3>
-                        <p>See your ROI, win rate, and how you stack up against a buy-and-hold strategy.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C805" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
-                        <h3>Leaderboard</h3>
-                        <p>Compete with other players. Climb the rankings and prove your trading skills.</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C805" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                        </div>
-                        <h3>Daily Challenges</h3>
-                        <p>A new challenge every day. Compare results with players taking the same daily challenge.</p>
-                    </div>
-                </div>
-            </div>
+        <section class="closing" aria-labelledby="ready-title">
+            <div><h2 id="ready-title">Your next move is yours.</h2><p>Questions before you play? <a href="support.html">Visit player support</a></p></div>
+            <a class="button" href="https://apps.apple.com/us/app/chartgame-trading-simulator/id6761395602"><span>Download on the App Store</span><span class="external-arrow" aria-hidden="true">↗</span></a>
         </section>
     </main>
-
-    <footer>
-        <div class="container">
+    <footer class="site-footer">
+        <div class="shell footer-inner">
             <p>&copy; 2026 XYZsLabs. All rights reserved.</p>
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Footer navigation">
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="support.html">Support</a>
-            </div>
+            </nav>
         </div>
     </footer>
 </body>
